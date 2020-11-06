@@ -2,13 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Joi = require('joi');
+const helmet = require('helmet');
 
 const app = express();
 
 // middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://genetech-backend.herokuapp.com'
+}));
+app.use(helmet());
 
 app.post('/contact', (req, res) => {
     const contactSchema = Joi.object({
