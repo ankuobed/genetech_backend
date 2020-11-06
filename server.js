@@ -21,6 +21,10 @@ app.post('/contact', (req, res) => {
     const error = result.error.details[0].message;
     res.status(422).json(error);
 
+    if (!error) {
+        res.status(200);
+    }
+
 });
 
 const PORT = process.env.PORT || 5000;
