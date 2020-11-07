@@ -9,9 +9,10 @@ const app = express();
 // middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({
-    origin: 'https://genetech-backend.herokuapp.com'
-}));
+// app.use(cors({
+//     origin: 'https://genetech-backend.herokuapp.com'
+// }));
+app.use(cors());
 app.use(helmet());
 
 app.post('/contact', (req, res) => {
@@ -22,10 +23,10 @@ app.post('/contact', (req, res) => {
     });
 
     const result = contactSchema.validate(req.body);
-    const error = result.error.details[0].message;
-    res.status(422).json(error);
-
-    if (!error) {
+    if (result.error) {
+        const error = result.error.details[0].message;
+        res.status(422).json(error);
+    } else {
         res.status(200);
     }
 
