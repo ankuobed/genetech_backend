@@ -27,7 +27,7 @@ app.post('/contact', (req, res) => {
         const error = result.error.details[0].message;
         res.status(422).json(error);
     } else {
-        res.status(200);
+        res.status(200).json('Message sent successfully');
     }
 
 });
