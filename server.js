@@ -17,7 +17,7 @@ app.use(helmet());
 
 app.post('/contact', (req, res) => {
     const contactSchema = Joi.object({
-        name: Joi.string().alphanum().min(3).required(),
+        name: Joi.string().min(3).required(),
         email: Joi.string().email().required(),
         message: Joi.string().max(1000).required()
     });
